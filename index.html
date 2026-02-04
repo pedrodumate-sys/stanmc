@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Caribecolombiana: Blog informativo especializado en los mejores computadores del mercado, análisis de hardware y guías de compra seguras en Colombia.">
+    <title>Caribecolombiana | Tecnología y Hardware</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playball&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES CSS & RESET --- */
+        :root {
+            --primary-color: #006994; /* Azul Caribe profundo */
+            --secondary-color: #40E0D0; /* Turquesa */
+            --accent-color: #ff7f50; /* Coral (para botones/acciones) */
+            --bg-light: #f4f7f6;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --border-color: #dbe2e8;
+            --font-cursive: 'Playball', cursive;
+            --font-body: 'Lato', sans-serif;
+            --box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- TIPOGRAFÍA PERSONALIZADA --- */
+        h1, h2, h3, h4, .brand-logo, .nav-link {
+            font-family: var(--font-cursive);
+        }
+        
+        p, li, span, div {
+            font-family: var(--font-body);
+        }
+
+        /* --- HEADER & NAVEGACIÓN --- */
+        header {
+            background-color: #fff;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0, 105, 148, 0.8), rgba(0, 105, 148, 0.6)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 2px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid white;
+        }
+
+        .btn-main:hover {
+            background-color: #fff;
+        }
+
+        /* --- LAYOUT DE RECUADROS (GRID) --- */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 10px auto;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* ESTILO DE TARJETA (RECUADRO) */
+        .card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 0; /* Bordes rectos para seriedad */
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--secondary-color);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* --- TABLA INFORMATIVA (RECUADRO TÉCNICO) --- */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-table th, .tech-table td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .tech-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-family: var(--font-body); /* Legible en tablas */
+        }
+
+        /* --- SIDEBAR & WIDGETS --- */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .widget {
+            background: #fff;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .widget h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- DISCLAIMER / AVISO LEGAL (CRUCIAL PARA ADS) --- */
+        .ads-disclaimer {
+            background-color: #fcf8e3;
+            border: 1px solid #faebcc;
+            color: #8a6d3b;
+            padding: 1rem;
+            margin: 2rem auto;
+            font-size: 0.85rem;
+            max-width: 1200px;
+        }
+
+        /* --- FOOTER & POLÍTICAS --- */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+
+        /* --- COOKIE BANNER --- */
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            display: none;
+            z-index: 9999;
+            border-top: 3px solid var(--accent-color);
+        }
+        #cookie-banner button {
+            background: var(--secondary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            margin-left: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                text-align: center;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ads-disclaimer">
+        <strong>Transparencia:</strong> Caribecolombiana participa en programas de afiliados. Si compras a través de nuestros enlaces, podríamos recibir una comisión sin costo extra para ti.
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <a href="#" class="brand-logo">Caribecolombiana</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span>&#9776;</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#analisis" class="nav-link">Análisis</a></li>
+                <li><a href="#tiendas" class="nav-link">Dónde Comprar</a></li>
+                <li><a href="#politica" class="nav-link">Privacidad</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Expertos en Computación</h1>
+            <p>Análisis profundos, especificaciones reales y las mejores opciones de compra en el mercado colombiano.</p>
+            <a href="#analisis" class="btn-main">Ver Recomendaciones</a>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        <h2 class="section-title">Análisis Destacados</h2>
+        
+        <div class="grid-container" id="analisis">
+            
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Laptop Gaming de alta gama" class="card-img">
+                <div class="card-body">
+                    <span class="card-category">Gaming Profesional</span>
+                    <h3 class="card-title">La Bestia del Rendimiento 2026</h3>
+                    <p class="card-text">Analizamos el procesador de última generación y la tarjeta gráfica que está revolucionando el mercado. Ideal para renderizado 3D y juegos AAA.</p>
+                    <table class="tech-table">
+                        <tr><th>RAM</th><td>32GB DDR5</td></tr>
+                        <tr><th>GPU</th><td>RTX 5080 Ti</td></tr>
+                        <tr><th>Precio Est.</th><td>$12.500.000 COP</td></tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <span class="read-more">Leer análisis completo &rarr;</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ultrabook para oficina" class="card-img">
+                <div class="card-body">
+                    <span class="card-category">Productividad / Oficina</span>
+                    <h3 class="card-title">Ligereza y Batería Infinita</h3>
+                    <p class="card-text">Para el ejecutivo moderno. Una laptop que pesa menos de 1kg y ofrece 18 horas de autonomía real. Perfecta para viajes de negocios.</p>
+                    <table class="tech-table">
+                        <tr><th>Peso</th><td>950g</td></tr>
+                        <tr><th>Pantalla</th><td>OLED 14"</td></tr>
+                        <tr><th>Precio Est.</th><td>$4.200.000 COP</td></tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <span class="read-more">Leer análisis completo &rarr;</span>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Computador de escritorio todo en uno" class="card-img">
+                <div class="card-body">
+                    <span class="card-category">Diseño Gráfico</span>
+                    <h3 class="card-title">Color y Precisión Visual</h3>
+                    <p class="card-text">Monitores calibrados de fábrica y potencia suficiente para la suite de Adobe completa sin ralentizaciones.</p>
+                    <table class="tech-table">
+                        <tr><th>Panel</th><td>4K IPS 100% sRGB</td></tr>
+                        <tr><th>CPU</th><td>Apple M3 / Intel i9</td></tr>
+                        <tr><th>Precio Est.</th><td>$7.800.000 COP</td></tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <span class="read-more">Leer análisis completo &rarr;</span>
+                </div>
+            </article>
+        </div>
+
+        <div class="content-wrapper">
+            
+            <main>
+                <h2 class="section-title" id="tiendas">Guía de Compra Segura</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">¿Dónde comprar hardware en Colombia?</h3>
+                        <p>Evita estafas y sobrecostos. Hemos verificado los siguientes distribuidores autorizados que ofrecen garantía local y soporte técnico:</p>
+                        <ul>
+                            <li style="margin-bottom:10px; padding:10px; border:1px solid #eee;"><strong>Alkosto / K-tronix:</strong> Recomendado para garantías directas y devoluciones sencillas.</li>
+                            <li style="margin-bottom:10px; padding:10px; border:1px solid #eee;"><strong>Amazon (Envío a Colombia):</strong> Ideal para componentes específicos que no se encuentran localmente.</li>
+                            <li style="margin-bottom:10px; padding:10px; border:1px solid #eee;"><strong>MercadoLibre (Tiendas Oficiales):</strong> Solo comprar en tiendas verificadas con medalla Platinum.</li>
+                        </ul>
+                        <br>
+                        <p><strong>Nota:</strong> Siempre verifica el número de serie en la página del fabricante al recibir tu equipo.</p>
+                    </div>
+                </div>
+            </main>
+
+            <aside>
+                <div class="widget">
+                    <h3>Boletín Semanal</h3>
+                    <p>Recibe ofertas y alertas de stock.</p>
+                    <input type="email" placeholder="Tu correo electrónico" style="width:100%; padding:10px; margin:10px 0; border:1px solid #ccc;">
+                    <button class="btn-main" style="width:100%; font-size:0.9rem;">Suscribirse</button>
+                    <p style="font-size:0.7rem; color:#888; margin-top:5px;">Respetamos tu privacidad. Sin spam.</p>
+                </div>
+
+                <div class="widget">
+                    <h3>Top Marcas</h3>
+                    <ul style="font-family: var(--font-cursive); font-size: 1.2rem;">
+                        <li>ASUS ROG</li>
+                        <li>Dell XPS</li>
+                        <li>Lenovo Legion</li>
+                        <li>Apple MacBook</li>
+                        <li>HP Omen</li>
+                    </ul>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Caribecolombiana</h4>
+                <p>Tu fuente confiable de información tecnológica en el Caribe y toda Colombia. Análisis imparciales y profesionales.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="footer-links" id="politica">
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Cookies</a></li>
+                    <li><a href="#">Contacto Editorial</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>Bogotá, Colombia</p>
+                <p>info@caribecolombiana.tech</p>
+                <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; <span id="year"></span> Caribecolombiana. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="cookie-banner">
+        Utilizamos cookies para asegurar la mejor experiencia. Al continuar navegando, aceptas nuestra política.
+        <button onclick="acceptCookies()">Aceptar</button>
+    </div>
+
+    <script>
+        // 1. Navegación Móvil
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // 2. Fecha dinámica en el footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 3. Lógica del Banner de Cookies (Simulación)
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        // Mostrar banner si no se ha aceptado
+        window.onload = function() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById('cookie-banner').style.display = 'block';
+            }
+        };
+
+        // 4. Smooth Scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navMenu.classList.remove('active'); // Cerrar menú móvil al hacer click
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
